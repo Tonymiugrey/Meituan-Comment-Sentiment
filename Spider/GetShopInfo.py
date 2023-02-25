@@ -1,5 +1,6 @@
 import csv
 import requests
+import pandas as pd
 # import pprint
 
 def requestData(search, page):
@@ -78,3 +79,8 @@ if __name__ == '__main__':
         # 搜索的页数
         for i in range(9):
             parseData(data=requestData(search='美食', page=i), csvFile=csvFile)
+
+    df = pd.read_csv('美食.csv')
+    df.drop_duplicates(subset=None, keep='first', inplace=True)
+    print(df.shape[0])
+    df.to_csv('美食.csv')
